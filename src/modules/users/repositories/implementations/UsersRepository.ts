@@ -46,6 +46,7 @@ class UsersRepository implements IUsersRepository {
     const userUpdate = this.users.reduce((accumulator, element) => {
       if (element.id === receivedUser.id) {
         element.admin = true;
+        element.updated_at = new Date();
         accumulator = element;
       }
 

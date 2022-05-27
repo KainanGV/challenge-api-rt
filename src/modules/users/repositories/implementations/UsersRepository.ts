@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { User } from "../../model/User";
 import { IUsersRepository, ICreateUserDTO } from "../IUsersRepository";
 
@@ -18,10 +19,13 @@ class UsersRepository implements IUsersRepository {
     return UsersRepository.INSTANCE;
   }
 
-  create({ name, email }: ICreateUserDTO): User {]
+  create({ name, email }: ICreateUserDTO): User {
     const user = new User();
-    
-    user.prototype.
+
+    user.name = name;
+    user.email = email;
+    user.created_at = new Date();
+    user.updated_at = new Date();
 
     this.users.push(user);
 
@@ -29,19 +33,32 @@ class UsersRepository implements IUsersRepository {
   }
 
   findById(id: string): User | undefined {
-    // Complete aqui
+    const user = this.users.find((element) => element.id === id);
+    return user;
   }
 
   findByEmail(email: string): User | undefined {
-    // Complete aqui
+    const user = this.users.find((element) => element.email === email);
+    return user;
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    const userUpdate = this.users.reduce((accumulator, element) => {
+      if (element.id === receivedUser.id) {
+        element.admin = true;
+        accumulator = element;
+      }
+
+      return accumulator;
+    }, {}) as User;
+
+    return userUpdate;
   }
 
   list(): User[] {
-    // Complete aqui
+    const listAllUsers = this.users;
+
+    return listAllUsers;
   }
 }
 

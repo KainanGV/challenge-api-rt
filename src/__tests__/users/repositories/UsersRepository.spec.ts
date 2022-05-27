@@ -9,7 +9,7 @@ describe("UsersRepository", () => {
     usersRepository = UsersRepository.getInstance();
   });
 
-  it("should be able to create new users", () => {
+  it("c", () => {
     const user = usersRepository.create({
       name: "Vinicius Fraga",
       email: "vinifraga@rocketseat.com",
